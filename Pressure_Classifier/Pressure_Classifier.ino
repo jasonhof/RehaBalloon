@@ -46,6 +46,8 @@ float initial_pressure_value;
 const float pressureThreshold = 7.5;
 const int numSamples = 119;
 int samplesRead = numSamples;
+int pumps_tot = 0;
+int qpumps_tot = 0;
 
 
 
@@ -224,12 +226,19 @@ void loop() {
           Serial.print(": ");
           Serial.println(tflOutputTensor->data.f[i], 6);
           if (tflOutputTensor->data.f[i] > 0.8) {
+            if (i == 0) { pumps_tot++; }
+            if (i == 1) { qpumps_tot++; }
             Serial.print(GESTURES[i]);
             Serial.print(" detected (prob: ");
             Serial.print(tflOutputTensor->data.f[i]);
             Serial.println(")");
           }
         }
+        Serial.print("Total pumps: ");
+        Serial.print(pumps_tot);
+        Serial.print(", Total quick pumps: ");
+        Serial.print(qpumps_tot);
+        Serial.println();
         delay(1000);
         Serial.println();
       }
