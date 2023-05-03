@@ -218,16 +218,16 @@ void loop() {
         }
 
         // Loop through the output tensor values from the model
-        Serial.println("Probabilities:")
+        Serial.println("Probabilities:");
         for (int i = 0; i < NUM_GESTURES; i++) {
           Serial.print(GESTURES[i]);
           Serial.print(": ");
           Serial.println(tflOutputTensor->data.f[i], 6);
           if (tflOutputTensor->data.f[i] > 0.8) {
-            Serial.print(GESTURES[i])
-            Serial.print(" detected (prob: ")
-            Serial.print(tflOutputTensor->data.f[i])
-            Serial.println(")")
+            Serial.print(GESTURES[i]);
+            Serial.print(" detected (prob: ");
+            Serial.print(tflOutputTensor->data.f[i]);
+            Serial.println(")");
           }
         }
         delay(1000);
