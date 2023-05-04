@@ -164,13 +164,14 @@ void light_loop() {
 
   if ((change <= 1) && (change >= -1)) {
     change = 0;
-    Serial.println(change);
+    // Serial.println(change);
   }else{
-    Serial.println(change);
+    int temp = 1;
+    // Serial.println(change);
   }   
   if(change <0){
-    Serial.print("Pressure is decreasing");
-    baseLine();
+    Serial.print("Pressure is decreasing, re-baselining...");
+    // baseLine();
   }
   if(change >= 0){
     if(change < 7){ //BLUE 
@@ -201,8 +202,6 @@ void light_loop() {
 void loop() {
   // float aX, aY, aZ, gX, gY, gZ;
 
-  // light_loop();
-
   float pressure = bmp.readPressure() / 100.0F;
 
   // Serial.println(pressure);
@@ -219,9 +218,10 @@ void loop() {
       // // sum up the absolutes
       // float aSum = fabs(aX) + fabs(aY) + fabs(aZ);
 
+      light_loop();
       float pressure = bmp.readPressure() / 100.0F;
       float change = pressure - initial_pressure_value;
-
+      
       // check if it's above the threshold
       if (change >= pressureThreshold) {
         // reset the sample read count
